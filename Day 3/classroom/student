@@ -1,0 +1,10 @@
+from .person import Person
+
+class Student(Person):
+    def __init__(self, firstname, lastname, subject):
+        super().__init__(firstname, lastname)
+        self.subject = subject
+
+    def print_name_subject(self):
+        full_name = self.get_full_name()
+        print(f"{full_name}, {self.subject}")

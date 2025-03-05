@@ -1,0 +1,10 @@
+from .person import Person
+
+class Teacher(Person):
+    def __init__(self, firstname, lastname, course):
+        super().__init__(firstname, lastname)
+        self.course = course
+
+    def print_name_course(self):
+        full_name = self.get_full_name()
+        print(f"{full_name} teaches {self.course}")
