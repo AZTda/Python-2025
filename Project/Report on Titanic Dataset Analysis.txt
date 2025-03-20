@@ -1,0 +1,61 @@
+**Report on Titanic Dataset Analysis**
+
+**1. Introduction**
+The Titanic dataset provides historical data on passengers aboard the Titanic, including information on whether they survived or not. The goal of this analysis is to build predictive models to determine survival probabilities based on various features. We implemented multiple machine learning algorithms and evaluated their performance to find the most effective model.
+
+**2. Data Exploration and Preprocessing**
+
+- The training dataset consists of **891 rows and 12 columns**, while the test dataset contains **418 rows and 11 columns**.
+- The dataset includes categorical (e.g., `Sex`, `Embarked`), numerical (e.g., `Age`, `Fare`), and ordinal features (e.g., `Pclass`).
+- Missing values were identified in three major columns:
+  - **Age**: 177 missing values.
+  - **Cabin**: 687 missing values, making it highly incomplete.
+  - **Embarked**: 2 missing values.
+
+To handle missing values:
+- `Age` was imputed using the median of respective passenger classes.
+- `Cabin` was categorized as either "Known" or "Unknown".
+- `Embarked` was imputed using the most frequent value.
+
+![Figure 1: Distribution of Missing Values](missing_values.png)
+
+**3. Data Visualization**
+Several visualizations were created to understand data distribution and correlations:
+
+- **Survival Rate by Gender:** Females had a significantly higher survival rate than males.
+  ![Figure 2: Survival Rate by Gender](survival_gender.png)
+- **Survival by Passenger Class:** First-class passengers had the highest survival rate, followed by second and third-class passengers.
+  ![Figure 3: Survival Rate by Passenger Class](survival_pclass.png)
+- **Age Distribution:** Most passengers were between 20 and 40 years old, with younger children having a higher survival rate.
+  ![Figure 4: Age Distribution of Passengers](age_distribution.png)
+- **Fare Distribution:** Higher fares were generally associated with higher survival rates.
+  ![Figure 5: Fare Distribution](fare_distribution.png)
+
+**4. Machine Learning Models and Results**
+The following models were implemented:
+
+| Model | Accuracy |
+|--------|-----------|
+| **Random Forest Classifier** | **84.36%** |
+| **LightGBM** | **81.01%** |
+| **CatBoost Classifier** | **82.68%** |
+| **XGBoost Classifier** | **82.12%** |
+| **Stacking Ensemble** | **83.24%** |
+
+**5. Observations and Performance Evaluation**
+- The **Random Forest Classifier** performed best among individual models, likely due to its ability to handle mixed data types effectively.
+- **Stacking Ensemble did not outperform Random Forest**, suggesting that the base models were not diverse enough to significantly improve accuracy.
+- LightGBM generated warnings related to "No further splits with positive gain," indicating a need for better hyperparameter tuning.
+- The importance of categorical variables (`Sex`, `Pclass`, `Embarked`) was evident, as they strongly influenced survival predictions.
+
+![Figure 6: Model Performance Comparison](model_performance.png)
+
+**6. Recommendations and Future Improvements**
+- **Feature Engineering**: Adding new features such as family size or ticket groupings could improve predictions.
+- **Hyperparameter Tuning**: LightGBM’s performance might improve with better parameter tuning.
+- **Alternative Ensemble Methods**: Trying weighted averaging or voting classifiers could lead to better model generalization.
+- **Addressing Class Imbalance**: Exploring resampling techniques could help improve model robustness.
+
+**7. Conclusion**
+This analysis provided insights into key factors affecting survival rates on the Titanic. Random Forest was the best-performing model, but additional optimizations could improve prediction accuracy. Future work should focus on better feature selection, advanced ensemble techniques, and deeper hyperparameter tuning.
+
